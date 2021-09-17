@@ -230,6 +230,23 @@ namespace CodeMonkey.Utils {
 	    }
 
 
+        //Get Mouse position in 3D
+        public static Vector3 GetMouseWorldPosition3D()
+        {
+            {
+                Plane plane = new Plane(Vector3.up, 0);
+                Vector3 worldPos;
+                float distance;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (plane.Raycast(ray, out distance))
+                {
+                    worldPos = ray.GetPoint(distance);
+                    return worldPos;
+                }
+                return new Vector3(-100, -100, -100);
+            }
+        }
 
         // Get Mouse Position in World with Z = 0f
         public static Vector3 GetMouseWorldPosition() {

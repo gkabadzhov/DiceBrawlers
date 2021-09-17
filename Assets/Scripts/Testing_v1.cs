@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 
-public class Testing : MonoBehaviour
+public class Testing_v1 : MonoBehaviour
 {
     private GridCustom<HeatMapGridObject> grid;
     
@@ -17,7 +17,7 @@ public class Testing : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Vector3 worldPos = GetMousePosition();
+            Vector3 worldPos = UtilsClass.GetMouseWorldPosition3D();
             //            grid.SetValue(worldPos, true);
             HeatMapGridObject heatMapGridObject = grid.GetGridObject(worldPos);
 
