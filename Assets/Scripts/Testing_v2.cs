@@ -5,7 +5,9 @@ using CodeMonkey.Utils;
 
 public class Testing_v2 : MonoBehaviour
 {
-    Pathfinding pathfinding;
+    [SerializeField] private CharacterPathfindingHandler characterPathfinding;
+    private Pathfinding pathfinding;
+
     private void Start()
     {
         pathfinding = new Pathfinding(10, 10);
@@ -26,10 +28,11 @@ public class Testing_v2 : MonoBehaviour
                 {
                     Debug.DrawLine(new Vector3(path[i].x, 0, path[i].y) * 10f + Vector3.one * 5f,
                                     new Vector3(path[i+1].x, 0, path[i+1].y) * 10f + Vector3.one * 5f, Color.green);
-                    Debug.Log("Current node is" + path[i].ToString());
 
                 }
             }
+
+            characterPathfinding.SetTargetPosition(mouseWorldPosition);
        
         }
     }

@@ -61,6 +61,11 @@ public class GridCustom<TGridObject>
             };
         }
     }
+    
+    public float GetCellSize()
+    {
+        return cellSize;
+    }
 
     public int GetWidth()
     {

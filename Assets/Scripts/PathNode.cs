@@ -13,6 +13,7 @@ public class PathNode
     public int hCost;
     public int fCost;
 
+    public bool isWalkable;
     public PathNode cameFromNode;
 
     public PathNode(GridCustom<PathNode> grid, int x, int y)
@@ -20,6 +21,7 @@ public class PathNode
         this.grid = grid;
         this.x = x;
         this.y = y;
+        isWalkable = true;
     }
 
     public override string ToString()
