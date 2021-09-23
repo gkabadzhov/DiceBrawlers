@@ -135,11 +135,16 @@ public static class MeshUtils {
 			vertices[vIndex2] = pos+GetQuaternionEuler(rot)*new Vector3( baseSize.x, 0, -baseSize.y);
 			vertices[vIndex3] = pos+GetQuaternionEuler(rot)*baseSize;
 		} else {
-			vertices[vIndex0] = pos+GetQuaternionEuler(rot-270)*baseSize;
-			vertices[vIndex1] = pos+GetQuaternionEuler(rot-180)*baseSize;
-			vertices[vIndex2] = pos+GetQuaternionEuler(rot- 90)*baseSize;
-			vertices[vIndex3] = pos+GetQuaternionEuler(rot-  0)*baseSize;
-		}
+            //vertices[vIndex0] = pos+GetQuaternionEuler(rot-270)*baseSize;
+            //vertices[vIndex1] = pos+GetQuaternionEuler(rot-180)*baseSize;
+            //vertices[vIndex2] = pos+GetQuaternionEuler(rot- 90)*baseSize;
+            //vertices[vIndex3] = pos+GetQuaternionEuler(rot-  0)*baseSize;
+
+            vertices[vIndex0] = pos + GetQuaternionEuler(rot) * new Vector3(-baseSize.x, 0, baseSize.y);
+            vertices[vIndex1] = pos + GetQuaternionEuler(rot) * new Vector3(-baseSize.x, 0, -baseSize.y);
+            vertices[vIndex2] = pos + GetQuaternionEuler(rot) * new Vector3(baseSize.x, 0, -baseSize.y);
+            vertices[vIndex3] = pos + GetQuaternionEuler(rot) * new Vector3(baseSize.x, 0, baseSize.y);
+        }
 		
 		//Relocate UVs
 		uvs[vIndex0] = new Vector2(uv00.x, uv11.y);

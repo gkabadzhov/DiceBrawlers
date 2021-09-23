@@ -31,7 +31,7 @@ public class Testing_v2 : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(state);
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             state = GameState.AreaUpdate;
