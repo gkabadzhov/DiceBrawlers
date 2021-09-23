@@ -12,6 +12,7 @@ public class Pathfinding
     private List<PathNode> openList;
     private List<PathNode> closedList;
 
+
     public Pathfinding (int width, int height)
     {
         
@@ -188,78 +189,119 @@ public class Pathfinding
         return lowestFCostNode;
     }
 
-    public List<PathNode> UpdateWalkableArea(int areaSize, Vector3 mousePosition)
+    public List<PathNode> GetWalkableArea(int areaSize, Vector3 mousePosition, int dir)
     {
         int leftToExpand = areaSize;
         PathNode currentNode = grid.GetGridObject(mousePosition);
         List<PathNode> walkableArea = new List<PathNode>();
 
-        while (leftToExpand > 0)
+        switch (dir)
         {
-
-            if (leftToExpand == 2 && leftToExpand != areaSize)
-            {
-                currentNode = GetNode(currentNode.x, currentNode.y - 1);
-                if (currentNode.x - 1 > 0)
+            case 1:
+                // 1 is UP
+                while (leftToExpand > 0)
                 {
-                    walkableArea.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
+                    if (leftToExpand == 2 && leftToExpand != areaSize)
+                    {
+                        currentNode = GetNode(currentNode.x, currentNode.y - 1);
+                        if (currentNode.x - 1 > 0)
+                        {
+                            walkableArea.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
+                        }
+                        if (currentNode.x + 1 <= grid.GetWidth())
+                        {
+                            walkableArea.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
+                        }
+                        leftToExpand = 0;
+                    }
+                    else
+                    {
+                        walkableArea.Add(currentNode);
+                        if (currentNode.y + 1 < grid.GetHeight())
+                        {
+                            leftToExpand--;
+                            currentNode = GetNode(currentNode.x, currentNode.y + 1);
+                        }
+                    }
                 }
-                if (currentNode.x + 1 <= grid.GetWidth())
-                {
-                    walkableArea.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
-                }
-                leftToExpand = 0;
-            }
-            else
-            {
+                break;
 
-                walkableArea.Add(currentNode);
-                if (currentNode.y + 1 < grid.GetHeight())
+            case 2:
+                //2 is RIGHT
+                // Default is up
+                while (leftToExpand > 0)
                 {
-                    leftToExpand--;
-                    Debug.Log(leftToExpand + " " + currentNode.x + " " +currentNode.y );
-                    currentNode = GetNode(currentNode.x, currentNode.y + 1);
-
+                    if (leftToExpand == 2 && leftToExpand != areaSize)
+                    {
+                        currentNode = GetNode(currentNode.x-1, currentNode.y);
+                        if (currentNode.y - 1 > 0)
+                        {
+                            walkableArea.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
+                        }
+                        if (currentNode.y + 1 <= grid.GetHeight())
+                        {
+                            walkableArea.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
+                        }
+                        leftToExpand = 0;
+                    }
+                    else
+                    {
+                        walkableArea.Add(currentNode);
+                        if (currentNode.x + 1 < grid.GetWidth())
+                        {
+                            leftToExpand--;
+                            currentNode = GetNode(currentNode.x+1, currentNode.y);
+                        }
+                    }
                 }
-            }
+                break;
+
+            case 3:
+                //3 is DOWN
+                while (leftToExpand > 0)
+                {
+                    if (leftToExpand == 2 && leftToExpand != areaSize)
+                    {
+                        currentNode = GetNode(currentNode.x, currentNode.y - 1);
+                        if (currentNode.x - 1 > 0)
+                        {
+                            walkableArea.Add(GetNode(currentNode.x - 1, currentNode.y - 3));
+                        }
+                        if (currentNode.x + 1 <= grid.GetWidth())
+                        {
+                            walkableArea.Add(GetNode(currentNode.x + 1, currentNode.y - 3));
+                        }
+                        leftToExpand = 0;
+                    }
+                    else
+                    {
+                        walkableArea.Add(currentNode);
+                        if (currentNode.y + 1 < grid.GetHeight())
+                        {
+                            leftToExpand--;
+                            currentNode = GetNode(currentNode.x, currentNode.y + 1);
+                        }
+                    }
+                }
+                break;
+
+            case 4:
+                break;
+
+            default:
+                break;
         }
-
-        foreach(PathNode n in walkableArea)
-        {
-            n.SetWalkable(true);
-            Debug.Log(n.x + ", " + n.y + " is now walkable");
-        }
-
+    
         return walkableArea;
 
-        //if (currentNode.x - 1 >= 0)
-        //{
-        //    //Left
-        //    neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y));
-        //}
-        //if (currentNode.x + 1 < grid.GetWidth())
-        //{
-        //    //Right
-        //    neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y));
-        //}
-        //if (currentNode.y - 1 >= 0)
-        //{
-        //    //Up
-        //    neighbourList.Add(GetNode(currentNode.x, currentNode.y - 1));
-        //}
-        //if (currentNode.y + 1 < grid.GetHeight())
-        //{
-        //    //down
-        //    neighbourList.Add(GetNode(currentNode.x, currentNode.y + 1));
-        //}
 
     }
 
-    private List<PathNode> GetTShapeArea()
+    public void UpdateWalkableArea(List<PathNode> area)
     {
-        List<PathNode> tShape = new List<PathNode>();
-
-        return tShape;
-
+        foreach (PathNode n in area)
+        {
+            n.SetWalkable(true);
+        }
     }
 }

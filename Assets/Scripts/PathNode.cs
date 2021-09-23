@@ -38,4 +38,6 @@ public class PathNode
     {
         fCost = gCost + hCost;
     }
+
+    
 }
