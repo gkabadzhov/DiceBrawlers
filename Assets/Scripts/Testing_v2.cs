@@ -35,5 +35,11 @@ public class Testing_v2 : MonoBehaviour
             characterPathfinding.SetTargetPosition(mouseWorldPosition);
        
         }
+
+        if (Input.GetMouseButton(1))
+        {
+            Vector3 mouseWorldPosition = UtilsClass.GetMouseWorldPosition3D();
+            pathfinding.UpdateWalkableArea(2, mouseWorldPosition);
+        }
     }
 }

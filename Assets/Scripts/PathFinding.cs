@@ -14,6 +14,7 @@ public class Pathfinding
 
     public Pathfinding (int width, int height)
     {
+        
         Instance = this;
         grid = new GridCustom<PathNode>(width, height, 10f, Vector3.zero, (GridCustom<PathNode> g, int x, int y) => new PathNode(g, x, y));
     }
@@ -185,5 +186,53 @@ public class Pathfinding
             }
         }
         return lowestFCostNode;
+    }
+
+    public void UpdateWalkableArea(int areaSize, Vector3 mousePosition)
+    {
+        int leftToExpand = areaSize;
+        PathNode currentNode = grid.GetGridObject(mousePosition);
+        List<PathNode> tShape = new List<PathNode>();
+
+        while (leftToExpand > 0)
+        {
+            if (currentNode.y + 1 < grid.GetWidth())
+            {
+                tShape.Add(currentNode);
+                currentNode = GetNode(currentNode.x, currentNode.y + 1);
+                leftToExpand--;
+            }                
+               
+              
+        }
+
+        //if (currentNode.x - 1 >= 0)
+        //{
+        //    //Left
+        //    neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y));
+        //}
+        //if (currentNode.x + 1 < grid.GetWidth())
+        //{
+        //    //Right
+        //    neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y));
+        //}
+        //if (currentNode.y - 1 >= 0)
+        //{
+        //    //Up
+        //    neighbourList.Add(GetNode(currentNode.x, currentNode.y - 1));
+        //}
+        //if (currentNode.y + 1 < grid.GetHeight())
+        //{
+        //    //down
+        //    neighbourList.Add(GetNode(currentNode.x, currentNode.y + 1));
+        //}
+    }
+
+    private List<PathNode> GetTShapeArea()
+    {
+        List<PathNode> tShape = new List<PathNode>();
+
+        return tShape;
+
     }
 }

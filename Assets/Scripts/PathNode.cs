@@ -23,6 +23,11 @@ public class PathNode
         this.y = y;
         isWalkable = true;
     }
+    
+    public void SetWalkable(bool isWalkable)
+    {
+        this.isWalkable = isWalkable;
+    }
 
     public override string ToString()
     {

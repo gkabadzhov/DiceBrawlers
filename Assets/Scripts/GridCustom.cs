@@ -26,6 +26,7 @@ public class GridCustom<TGridObject>
         this.cellSize = cellSize;
         this.originPosition = originPosition;
 
+
         gridArray = new TGridObject[width, height];
 
         for (int x = 0; x < gridArray.GetLength(0); x++)
@@ -129,4 +130,5 @@ public class GridCustom<TGridObject>
         GetXY(worldPosition, out x, out y);
         return GetGridObject(x, y);
     }
+
 }
